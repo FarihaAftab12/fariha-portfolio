@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+/* next-themes toggles the `dark` class on <html> */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* light theme */
+  --bg: #f4f3ef;
+  --bg-soft: #ffffff;
+  --card: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.14);
+  --fg: #141414;
+  --muted: #5a5a5a;
+  --faint: #cfcdc6;
+  --outline-text: #e4e2db;
+  --accent: #1d6fe0;
+  --gold: #b07e0a;
+}
+
+.dark {
+  /* dark theme (default look, matches reference) */
+  --bg: #050506;
+  --bg-soft: #0a0a0c;
+  --card: #0e0e11;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --fg: #f5f5f6;
+  --muted: #8c8c92;
+  --faint: #2a2a2e;
+  --outline-text: #1c1c20;
+  --accent: #3b86f7;
+  --gold: #d8af3c;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-gold: var(--gold);
+  --font-display: var(--font-oswald);
+  --font-body: var(--font-serif);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-serif), Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Scroll-snap container for the Apple-style section paging */
+.snap-root {
+  height: 100dvh;
+  overflow-y: auto;
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+.font-display {
+  font-family: var(--font-oswald), Impact, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+/* Huge outlined / layered hero name */
+.hero-name {
+  font-family: var(--font-oswald), Impact, sans-serif;
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+/* skeleton shimmer */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--faint);
+  border-radius: 0.5rem;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.09),
+    transparent
+  );
+  animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* thin custom scrollbar */
+.snap-root::-webkit-scrollbar {
+  width: 8px;
+}
+.snap-root::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 8px;
+}
+.snap-root::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.card:hover {
+  border-color: var(--border-strong);
+}
+
+.field {
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  color: var(--fg);
+  transition: border-color 0.2s ease;
+}
+.field:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.field::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
