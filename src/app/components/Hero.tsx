@@ -70,7 +70,7 @@ export default function Hero() {
               <Skeleton className="absolute inset-0 rounded-3xl" />
             )}
             <Image
-              src="/fariha avtar.png"
+              src="/farihaavtar.png"
               alt="Fariha Aftab avatar"
               fill
               priority
